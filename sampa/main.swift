@@ -141,8 +141,8 @@ class Dispatcher: NSObject, NSSpeechRecognizerDelegate {
     
     func provideService(command: String, sender: NSSpeechRecognizer) {
         if (command == "goodbye" || command == "ok bye" || command == "stop") {
-            print("I am leaving now sir, ciao")
-            speak(text: "I am leaving now sir, chow")
+            print("I am leaving now sir, bye baby")
+            speak(text: "I am leaving now sir, ciao piccola")
             working = false
             sender.stopListening()
         }

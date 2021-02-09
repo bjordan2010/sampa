@@ -134,8 +134,8 @@ class Dispatcher: NSObject, NSSpeechRecognizerDelegate {
             speak(text: "I will shut down your computer in 1 minute when you say sign off, shut down, or log off. Please be sure to close all applications.")
         }
         else if (command == "help ask") {
-            print("I will perform calculations when you say ask. For example, when you say ask and 2+2 when prompted I will say 4 and I will say 239_184 when you ask and when prompted you say square root of 57_208_985_856.")
-            speak(text: "I will perform calculations when you say ask.  For example, when you say ask and 2+2 when prompted I will say 4 and I will say 239,184 when you ask and when prompted you say square root of 57,208,985,856.")
+            print("I will perform calculations when you say ask. For example, when you say ask and enter 2+2 when prompted I will say 4 and I will say 239_184 when you say ask and when prompted you enter square root of 57_208_985_856.")
+            speak(text: "I will perform calculations when you say ask.  For example, when you say ask and enter 2+2 when prompted I will say 4 and I will say 239,184 when you say ask and when prompted you enter square root of 57,208,985,856.")
         }
     }
     
@@ -191,18 +191,24 @@ class Dispatcher: NSObject, NSSpeechRecognizerDelegate {
             }
             let minute = cal.component(.minute, from: date)
             var prefixMinute = ""
+            var pmin = ""
             if (minute > 0 && minute < 10) {
                 prefixMinute = "oh"
+                pmin = String(format: "%02d", minute)
+            }
+            else {
+                pmin = String(minute)
             }
             var min = ""
             if (minute == 0) {
                 min = "oh clock"
+                pmin = "00"
             }
             else {
                 min = String(minute)
             }
             
-            print("\(hour):\(minute < 10 ? 0+minute : minute) \(cal.component(.hour, from: date) >= 12 ? cal.pmSymbol : cal.amSymbol)")
+            print("\(hour):\(pmin) \(cal.component(.hour, from: date) >= 12 ? cal.pmSymbol : cal.amSymbol)")
             speak(text: "The current time is \(hour) \(prefixMinute) \(min) \(cal.component(.hour, from: date) >= 12 ? cal.pmSymbol : cal.amSymbol)")
         }
         else if (command.contains("ask")) {
